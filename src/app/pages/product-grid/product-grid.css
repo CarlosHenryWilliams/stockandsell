@@ -24,3 +24,10 @@
 .card-title{
     padding-bottom: 20px;
 }
+
+/*Clase de los botones de mat icon*/
+.mat-mdc-unelevated-button > .mat-icon {
+  /* ¡Importante! Establece tus valores deseados, a menudo 0 o auto. */
+  margin-right: 0;
+  margin-left: 0; 
+}
