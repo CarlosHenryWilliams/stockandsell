@@ -21,20 +21,45 @@ export class ProductGrid {
 
   readonly dialog = inject(MatDialog);
 
-  addDialog():void{
+ /* addDialog():void{
     this.dialog.open(DialogProductAddEdit,{
       data:{
         codigoProducto : null
       },
     })
   }
-  
-  editDialog(productId : number){
-    this.dialog.open(DialogProductAddEdit, {
-      data:{
-        codigoProducto: productId
+  */
+
+  // --- 1. Agregar Producto ---
+  addDialog(): void {
+    const dialogRef = this.dialog.open(DialogProductAddEdit, {
+      data: {
+        codigoProducto: null // Valor para indicar que es modo 'Agregar'
+      },
+    });
+
+    // Suscribirse al cierre
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { 
+        this.snackBar.open("Producto Agregado Correctamente", '', {
+          duration: 3000,
+        });
       }
     });
+  }
+  editDialog(productId : number){
+      const dialogRef = this.dialog.open(DialogProductAddEdit, {
+        data:{
+          codigoProducto: productId
+        }
+      });
+      dialogRef.afterClosed().subscribe(result =>{
+        if(result){
+          this.snackBar.open("Producto Editado Correctamente", '',{
+            duration: 3000,
+          });
+        }
+      })
   }
 
 
@@ -78,6 +103,8 @@ export class ProductGrid {
 
   deleteProduct(productId: number){
     this.productService.deleteProduct(productId);
-    this.snackBar.open("Producto Eliminado Correctamente");
+    this.snackBar.open("Producto Eliminado Correctamente", '',{
+      duration: 3000,
+    });
   }
 }

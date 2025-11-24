@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ProductApi } from '../../services/product-api';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Product from '../../models/Product';
 import { CommonModule } from '@angular/common';
@@ -21,7 +20,6 @@ export class DialogProductAddEdit {
 
   productService = inject(ProductApi);
   router = inject(Router);
-  snackBar = inject(MatSnackBar);
   route = inject(ActivatedRoute);
 
 
@@ -52,27 +50,6 @@ export class DialogProductAddEdit {
       cantidadDisponible: [null, [Validators.required, Validators.min(0)]]
     });
 
- 
-   /* this.route.paramMap.subscribe( params => {
-      const id = params.get("id");
-
-      if(id){
-        this.isEditMode = true;
-        this.productId = +id;  // Convertir a numero
-
-        this.productService.getProductById(this.productId)
-         .subscribe(product => {
-              this.loadProductData(product); 
-           });
-
-        //this.productService.getProducts(); //Llamar a los productos
-
-        effect(() => {
-         //  this.loadProductData(this.productId);    
-       
-        })
-      }
-    });*/
   }
 
   getProductById(productId : number){
@@ -83,7 +60,6 @@ export class DialogProductAddEdit {
       });
   }
   loadProductData(product: Product){
-  //  const product = this.productService.getProductById(productId);
     if(product){
       /**Asignar valores al formulario */
       this.productForm.patchValue({
@@ -104,16 +80,12 @@ export class DialogProductAddEdit {
       if(this.isEditMode && this.productId !== 0){  // si esta en modo edicion y el product id es distinto de 0, se edita.
         //Editar un producto
         this.productService.updateProduct(this.productId, product);
-        this.snackBar.open("Producto Editado Correctamente");        
-        this.dialogRef.close();
-        //this.router.navigate(["/dashboard"]);
-
+        this.dialogRef.close(true); 
       } else{
         //Agregar producto
         this.productService.addProduct(product);
-        this.snackBar.open("Producto Agregado Correctamente");        
-        //this.router.navigate(["/dashboard"]);
-        this.dialogRef.close();
+     
+        this.dialogRef.close(true); 
       }
     }
   }
