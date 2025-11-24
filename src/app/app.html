@@ -1,17 +1,15 @@
 <mat-sidenav-container class="sidebar-container">
   <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
     <mat-nav-list>
-      <mat-list-item routerLink="/dashboard">
-        Dashboard
+
+      <mat-list-item routerLink="/" class="listaDBNone">
+        Stock&Sell
       </mat-list-item>
-      <mat-list-item routerLink="/add-product">
-        Agregar un producto
-      </mat-list-item>
-      <mat-list-item routerLink="/list">
+      <mat-list-item routerLink="/dashboard" class="listaDB">
         Lista de Productos
       </mat-list-item>
-      <mat-list-item routerLink="/">
-        Contactanos
+      <mat-list-item routerLink="/add-product" class="listaDB">
+        Agregar un producto
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>

@@ -1,1 +1,73 @@
-<p>product-add-edit works!</p>
+<mat-card class="add-edit-card">
+    <mat-card-header>
+        <mat-card-title class="card-title"> {{isEditMode ? 'Editar' : 'Agregar' }} Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                
+                
+                <div class="form-row">
+                    <mat-form-field>
+                        <mat-label>
+                            Ingresar Nombre
+                        </mat-label>
+                        <input matInput formControlName="nombre" placeholder="Ingresar nombre" />
+                        @if (productForm.get('nombre')?.hasError('required')) {
+                            <mat-error> Ingrese el nombre por favor</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field>
+                        <mat-label>
+                            Ingresar Marca
+                        </mat-label>
+                        <input matInput formControlName="marca" placeholder="Ingresar marca" />
+                        @if (productForm.get('marca')?.hasError('required')) {
+                            <mat-error> Ingrese la marca por favor</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                
+                 <div class="form-row">
+                    <mat-form-field>
+                        <mat-label>
+                            Ingresar Costo
+                        </mat-label>
+                        <input matInput formControlName="costo" placeholder="Ingresar costo" />
+                        @if (productForm.get('costo')?.hasError('required')) {
+                            <mat-error> Ingrese el costo por favor</mat-error>
+                        }@else if (productForm.get('costo')?.hasError('min')) {
+                            <mat-error> el costo debe ser positivo</mat-error>
+
+                        }
+                    </mat-form-field>
+                </div>
+
+                            
+                 <div class="form-row">
+                    <mat-form-field>
+                        <mat-label>
+                            Ingresar Stock
+                        </mat-label>
+                        <input matInput formControlName="cantidadDisponible" placeholder="Ingresar stock" />
+                        @if (productForm.get('cantidadDisponible')?.hasError('required')) {
+                            <mat-error> Ingrese el stock por favor</mat-error>
+                        }@else if (productForm.get('cantidadDisponible')?.hasError('min')) {
+                            <mat-error> El stock debe ser positivo</mat-error>
+
+                        }
+                    </mat-form-field>
+                </div>      
+            </div>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="productForm.invalid">
+             {{isEditMode ? 'Editar' : 'Agregar' }} 
+        </button>
+    </mat-card-actions>
+</mat-card>

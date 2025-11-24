@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, } from '@angular/core';
 import Product from '../models/Product';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +25,9 @@ export class ProductApi {
   }
 
   // GET PRODUCT BY ID
-  getProductById(id : number){
-    return this.productsSignal().find( product => product.codigoProducto == id); // get product from the signal
+  getProductById(id : number) : Observable<Product>{
+    return this.http.get<Product>(`${this.API_PRODUCTS_URL}/${id}`);
+   // return this.productsSignal().find( product => product.codigoProducto == id); // get product from the signal
   }
 
 

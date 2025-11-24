@@ -40,7 +40,6 @@ export class ProductGrid {
     effect(() =>{ // cada vez que hay un cambio se activa
       const products = this.products();
       this.dataSource.data = products; // la fuente de datos se configuran cada vez que cambian
-      console.log(this.dataSource);
       this.totalItems = products.length;  // rellenar items totales
     })
   }
@@ -54,5 +53,10 @@ export class ProductGrid {
 
   ngAfterViewInit(){
     this.dataSource.paginator = this.paginator; // cualquier valor que uso el usuario se establece (itemps per page del paginador)
+  }
+
+  deleteProduct(productId: number){
+    this.productService.deleteProduct(productId);
+    this.snackBar.open("Producto Eliminado Correctamente");
   }
 }
