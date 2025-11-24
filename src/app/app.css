@@ -11,7 +11,7 @@
 
 .btn-sb {
     border: 0px;
-    padding: 5px 5px 3px 5px;
+    padding: 5px 5px 2px 5px;
     border-radius: 6px;
     background-color: white;
 }
@@ -29,7 +29,7 @@
 .mat-toolbar{
     background-color: #279AF1;
     border-radius: 12px 12px 0px 0px;
-    box-shadow:  1px 1px 1px 0px;
+    box-shadow:  1px 1px 3px 0px;
 }
 
 .listaDBNone {
