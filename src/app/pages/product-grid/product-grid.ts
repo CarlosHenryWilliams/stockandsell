@@ -22,11 +22,19 @@ export class ProductGrid {
   readonly dialog = inject(MatDialog);
 
   addDialog():void{
-    this.dialog.open(DialogProductAddEdit);
+    this.dialog.open(DialogProductAddEdit,{
+      data:{
+        codigoProducto : null
+      },
+    })
   }
   
   editDialog(productId : number){
-    this.dialog.open(DialogProductAddEdit);
+    this.dialog.open(DialogProductAddEdit, {
+      data:{
+        codigoProducto: productId
+      }
+    });
   }
 
 

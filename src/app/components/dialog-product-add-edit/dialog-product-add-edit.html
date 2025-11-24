@@ -12,7 +12,7 @@
                     <mat-label>
                         Ingresar Nombre
                     </mat-label>
-                    <input matInput formControlName="nombre" placeholder="Ingresar nombre" />
+                    <input  matInput formControlName="nombre" placeholder="Ingresar nombre" />
                     @if (productForm.get('nombre')?.hasError('required')) {
                         <mat-error> Ingrese el nombre por favor</mat-error>
                     }

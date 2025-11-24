@@ -37,6 +37,13 @@ export class DialogProductAddEdit {
     @Inject(MAT_DIALOG_DATA) public data: Product   // Para injectar datos
   ){
 
+    this.productId = data.codigoProducto;
+
+    if(this.productId!=null){
+     this.getProductById(this.productId)
+    }
+
+
     // Formulario
     this.productForm = this.fb.group({
       nombre:["", Validators.required],
@@ -45,7 +52,8 @@ export class DialogProductAddEdit {
       cantidadDisponible: [null, [Validators.required, Validators.min(0)]]
     });
 
-    this.route.paramMap.subscribe( params => {
+ 
+   /* this.route.paramMap.subscribe( params => {
       const id = params.get("id");
 
       if(id){
@@ -57,17 +65,23 @@ export class DialogProductAddEdit {
               this.loadProductData(product); 
            });
 
-        /*//this.productService.getProducts(); //Llamar a los productos
+        //this.productService.getProducts(); //Llamar a los productos
 
         effect(() => {
          //  this.loadProductData(this.productId);    
        
-        })*/
+        })
       }
-    });
+    });*/
   }
 
-
+  getProductById(productId : number){
+      this.isEditMode = true;
+      this.productService.getProductById(productId)
+      .subscribe(product => {
+            this.loadProductData(product); 
+      });
+  }
   loadProductData(product: Product){
   //  const product = this.productService.getProductById(productId);
     if(product){
@@ -83,23 +97,22 @@ export class DialogProductAddEdit {
   }
 
   onSubmit(){
-    console.log("Form enviado");
-    console.log(this.productForm.value);
 
     if(this.productForm.valid){
-      const product: Product = {...this.productForm.value, codigoProducto:this.productId || Date.now()};
+      const product: Product = {...this.productForm.value, codigoProducto:this.productId}; // asginar al codigoproducto el productid
 
-      if(this.isEditMode && this.productId !== null){ 
+      if(this.isEditMode && this.productId !== 0){  // si esta en modo edicion y el product id es distinto de 0, se edita.
         //Editar un producto
         this.productService.updateProduct(this.productId, product);
         this.snackBar.open("Producto Editado Correctamente");        
-        this.router.navigate(["/dashboard"]);
+        this.dialogRef.close();
+        //this.router.navigate(["/dashboard"]);
 
       } else{
         //Agregar producto
         this.productService.addProduct(product);
         this.snackBar.open("Producto Agregado Correctamente");        
-        this.router.navigate(["/dashboard"]);
+        //this.router.navigate(["/dashboard"]);
         this.dialogRef.close();
       }
     }
