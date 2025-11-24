@@ -59,3 +59,8 @@
 .mat-mdc-header-row {
     background-color: #279AF1 !important;
 }
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}

@@ -8,6 +8,8 @@ import { ProductApi } from '../../services/product-api';
 import Product from '../../models/Product';
 import { RouterModule } from '@angular/router';
 import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { DialogProductAddEdit } from '../../components/dialog-product-add-edit/dialog-product-add-edit';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-grid',
@@ -16,6 +18,17 @@ import { MatIcon, MatIconModule } from "@angular/material/icon";
   styleUrl: './product-grid.css',
 })
 export class ProductGrid {
+
+  readonly dialog = inject(MatDialog);
+
+  addDialog():void{
+    this.dialog.open(DialogProductAddEdit);
+  }
+  
+  editDialog(productId : number){
+    this.dialog.open(DialogProductAddEdit);
+  }
+
 
   productService = inject(ProductApi);
   snackBar = inject(MatSnackBar);

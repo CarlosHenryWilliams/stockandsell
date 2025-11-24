@@ -1,0 +1,76 @@
+
+<h2 mat-dialog-title class="card-title"> 
+    {{isEditMode ? 'Editar' : 'Agregar' }} Producto
+</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            
+            <div class="form-row">
+                <mat-form-field>
+                    <mat-label>
+                        Ingresar Nombre
+                    </mat-label>
+                    <input matInput formControlName="nombre" placeholder="Ingresar nombre" />
+                    @if (productForm.get('nombre')?.hasError('required')) {
+                        <mat-error> Ingrese el nombre por favor</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field>
+                    <mat-label>
+                        Ingresar Marca
+                    </mat-label>
+                    <input matInput formControlName="marca" placeholder="Ingresar marca" />
+                    @if (productForm.get('marca')?.hasError('required')) {
+                        <mat-error> Ingrese la marca por favor</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            
+             <div class="form-row">
+                <mat-form-field>
+                    <mat-label>
+                        Ingresar Costo
+                    </mat-label>
+                    <input matInput type="number" formControlName="costo" placeholder="Ingresar costo" />
+                    @if (productForm.get('costo')?.hasError('required')) {
+                        <mat-error> Ingrese el costo por favor</mat-error>
+                    }@else if (productForm.get('costo')?.hasError('min')) {
+                        <mat-error> el costo debe ser positivo</mat-error>
+
+                    }
+                </mat-form-field>
+            </div>
+
+             <div class="form-row">
+                <mat-form-field>
+                    <mat-label>
+                        Ingresar Stock
+                    </mat-label>
+                    <input matInput type="number"  formControlName="cantidadDisponible" placeholder="Ingresar stock" />
+                    @if (productForm.get('cantidadDisponible')?.hasError('required')) {
+                        <mat-error> Ingrese el stock por favor</mat-error>
+                    }@else if (productForm.get('cantidadDisponible')?.hasError('min')) {
+                        <mat-error> El stock debe ser positivo</mat-error>
+
+                    }
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">Cancelar</button>
+    
+    <button mat-raised-button color="primary" 
+            (click)="onSubmit()" 
+            [disabled]="productForm.invalid"
+            cdkFocusInitial>
+        {{ isEditMode ? 'Editar' : 'Agregar' }}
+    </button>
+</mat-dialog-actions>
