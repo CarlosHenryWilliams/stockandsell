@@ -36,6 +36,7 @@ export class ProductGrid {
       data: {
         codigoProducto: null // Valor para indicar que es modo 'Agregar'
       },
+      autoFocus: false
     });
 
     // Suscribirse al cierre
@@ -51,7 +52,8 @@ export class ProductGrid {
       const dialogRef = this.dialog.open(DialogProductAddEdit, {
         data:{
           codigoProducto: productId
-        }
+        },
+          autoFocus: false
       });
       dialogRef.afterClosed().subscribe(result =>{
         if(result){
