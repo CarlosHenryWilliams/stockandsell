@@ -1,0 +1,14 @@
+.mat-typography{
+    width: 450px;
+    max-width: 90vw;
+    margin: 5px;
+    border-radius: 12px !important;
+}
+
+.inputs {
+    width: 100%;
+}
+
+.btn-form {
+    border-radius: 12px;
+}

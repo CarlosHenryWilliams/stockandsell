@@ -64,3 +64,15 @@
     display: flex;
     justify-content: space-between;
 }
+
+.add-btn {
+
+    border-radius: 12px;
+    background-color: #279AF1 !important;
+    color: #fff;
+
+}
+
+.add-btn:hover{
+    background-color: #126aad !important;
+}
