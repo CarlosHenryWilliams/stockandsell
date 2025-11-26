@@ -1,0 +1,18 @@
+
+<h2 mat-dialog-title> 
+   Eliminar Producto
+</h2>
+
+<mat-dialog-content>
+   <p>¿Está seguro que desea eliminar el producto?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false" class="btn-form">Cancelar</button>
+    
+    <button mat-raised-button color="primary" 
+            (click)="onSubmit()" 
+            cdkFocusInitial class="btn-form">
+            Eliminar
+    </button>
+</mat-dialog-actions>

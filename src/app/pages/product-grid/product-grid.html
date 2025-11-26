@@ -36,10 +36,7 @@
                     <button mat-flat-button class="edit-btn" (click)="editDialog(product.codigoProducto)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <!--<button mat-flat-button class="edit-btn" [routerLink]="['/edit', product.codigoProducto]">
-                        <mat-icon>edit</mat-icon>
-                    </button>-->
-                    <button mat-flat-button class="delete-btn" (click)="deleteProduct(product.codigoProducto)">
+                    <button mat-flat-button class="delete-btn" (click)="deleteDialog(product.codigoProducto)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>

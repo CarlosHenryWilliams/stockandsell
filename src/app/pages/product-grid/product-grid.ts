@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { DialogProductAddEdit } from '../../components/dialog-product-add-edit/dialog-product-add-edit';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogProductDelete } from '../../components/dialog-product-delete/dialog-product-delete';
 
 @Component({
   selector: 'app-product-grid',
@@ -19,57 +20,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProductGrid {
 
+  //Injeccion de matDialog
   readonly dialog = inject(MatDialog);
-
- /* addDialog():void{
-    this.dialog.open(DialogProductAddEdit,{
-      data:{
-        codigoProducto : null
-      },
-    })
-  }
-  */
-
-  // --- 1. Agregar Producto ---
-  addDialog(): void {
-    const dialogRef = this.dialog.open(DialogProductAddEdit, {
-      data: {
-        codigoProducto: null // Valor para indicar que es modo 'Agregar'
-      },
-      autoFocus: false
-    });
-
-    // Suscribirse al cierre
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) { 
-        this.snackBar.open("Producto Agregado Correctamente", '', {
-          duration: 3000,
-        });
-      }
-    });
-  }
-  editDialog(productId : number){
-      const dialogRef = this.dialog.open(DialogProductAddEdit, {
-        data:{
-          codigoProducto: productId
-        },
-          autoFocus: false
-      });
-      dialogRef.afterClosed().subscribe(result =>{
-        if(result){
-          this.snackBar.open("Producto Editado Correctamente", '',{
-            duration: 3000,
-          });
-        }
-      })
-  }
-
-
   productService = inject(ProductApi);
   snackBar = inject(MatSnackBar);
-
   displayedColumns: string[] = ["codigoProducto", "nombre", "marca", "costo", "cantidadDisponible", "acciones"];
-
   dataSource = new MatTableDataSource<Product>();
 
   totalItems: number = 0;
@@ -93,7 +48,6 @@ export class ProductGrid {
   }
 
   onPageChange(event: any){
-
     this.pageSize = event.pageSize;
     this.dataSource.paginator = this.paginator;
   }
@@ -103,10 +57,56 @@ export class ProductGrid {
     this.dataSource.paginator = this.paginator; // cualquier valor que uso el usuario se establece (itemps per page del paginador)
   }
 
-  deleteProduct(productId: number){
-    this.productService.deleteProduct(productId);
-    this.snackBar.open("Producto Eliminado Correctamente", '',{
-      duration: 3000,
+
+  // Agregar Producto 
+  addDialog(): void {
+    const dialogRef = this.dialog.open(DialogProductAddEdit, {
+      data: {
+        codigoProducto: null // Valor para indicar que es modo 'Agregar'
+      }
+    });
+
+    // Suscribirse al cierre
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { 
+        this.snackBar.open("Producto Agregado Correctamente", '', {
+          duration: 3000,
+        });
+      }
     });
   }
+
+  // Editar Producto 
+  editDialog(productId : number){
+      const dialogRef = this.dialog.open(DialogProductAddEdit, {
+        data:{
+          codigoProducto: productId
+        }
+      });
+      dialogRef.afterClosed().subscribe(result =>{
+        if(result){
+          this.snackBar.open("Producto Editado Correctamente", '',{
+            duration: 3000,
+          });
+        }
+      })
+  }
+
+  // Eliminar Producto 
+  deleteDialog(productId: number){
+    const dialogDelete = this.dialog.open(DialogProductDelete, {
+      data:{
+          codigoProducto: productId // le pasa el id
+        }
+    });
+
+    dialogDelete.afterClosed().subscribe(result => {
+      if (result) { 
+          this.snackBar.open("Producto Eliminado Correctamente", '',{
+           duration: 3000,
+      });
+      }
+    });
+  }
+
 }

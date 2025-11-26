@@ -5,11 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ProductApi } from '../../services/product-api';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Product from '../../models/Product';
 import { CommonModule } from '@angular/common';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 @Component({
   selector: 'app-dialog-product-add-edit',
   imports:[CommonModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatIconModule, MatFormFieldModule, MatDialogModule],
@@ -19,9 +17,6 @@ import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } 
 export class DialogProductAddEdit {
 
   productService = inject(ProductApi);
-  router = inject(Router);
-  route = inject(ActivatedRoute);
-
 
   productForm : FormGroup;
 
@@ -30,7 +25,7 @@ export class DialogProductAddEdit {
 
   constructor(
     private fb: FormBuilder,
-    // Inyecciones para el formulario
+    // Inyecciones para el MatDialog
     public dialogRef: MatDialogRef<DialogProductAddEdit>, 
     @Inject(MAT_DIALOG_DATA) public data: Product   // Para injectar datos
   ){
