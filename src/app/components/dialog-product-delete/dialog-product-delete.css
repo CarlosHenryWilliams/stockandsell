@@ -1,0 +1,12 @@
+.btn-form {
+    border-radius: 12px;
+}
+
+.delete {
+    background-color: #d83131;
+    color: white;
+}
+
+.delete:hover {
+    background-color: #b32d2d;
+}
